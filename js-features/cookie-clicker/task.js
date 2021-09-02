@@ -7,7 +7,7 @@ let eSpanAverage = document.getElementById('clicker__average')
 let count = 0
 let timeStart = null
 eImage.onclick = function () {
-    count = count + 1
+    count ++
     let now = new Date()
     eSpanCounter.innerText = count
     eSpanAverage.innerText = timeStart === null ? 0 : (count / ((now - timeStart) / 1000)).toFixed(2)

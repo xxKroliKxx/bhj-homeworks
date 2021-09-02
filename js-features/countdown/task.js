@@ -17,7 +17,7 @@ let time = timer.innerText.split(':')
 let second = Number(time[0] * 3600) + Number(time[1] * 60) + Number(time[2])
 
 let countdown = function () {
-    second = second - 1
+    second --
     let hours = Math.floor(second / 3600)
     let minutes = Math.floor(second / 60) - (hours * 60)
     timer.innerText = [

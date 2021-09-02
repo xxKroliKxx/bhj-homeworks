@@ -5,10 +5,10 @@ let eLost = document.getElementById('lost')
 
 let onClick = function () {
     if (this.classList.contains('hole_has-mole')) {
-        count = count + 1
+        count ++
         eDead.innerText = count
     } else {
-        miss = miss + 1
+        miss ++
         eLost.innerText = miss
     }
     let newGame = false
