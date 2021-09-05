@@ -13,6 +13,12 @@ function onClick(e) {
     if (!this.hasAttribute('href') || this.getAttribute('href') != '') {
         return
     }
+
+    if (currentActiveElement != null && this.parentElement === currentActiveElement.parentElement) {
+        currentActiveElement = null
+        return false
+    }
+
     currentActiveElement = this.parentElement.querySelector('.menu .menu_sub')
     currentActiveElement.classList.add('menu_active')
     return false;
