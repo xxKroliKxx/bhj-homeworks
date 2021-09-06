@@ -15,13 +15,15 @@ let onchange = function (e) {
         }
     }
 
-    checked = false
+    let checked = null
     for (let i = 0; i < children.length; i++) {
         let child = children[i]
         if (child.parentElement === parent) {
             let checkboxe = children[i].querySelector('.interest__check')
-            if (checkboxe.checked) {
-                checked = true
+            if (checked === null) {
+                checked = checkboxe.checked
+            } else if (checkboxe.checked != checked) {
+                checked = undefined
                 break
             }
         }
@@ -34,7 +36,12 @@ function checkParents(e, checked) {
     let parent = e.closest('li.interest')
     if (parent === null) return
     let children = parent.querySelector('.interest__check')
-    children.checked = checked
+    if (checked === undefined) {
+        children.indeterminate = true
+    } else {
+        children.checked = checked
+        children.indeterminate = false
+    }
     checkParents(children.closest('.interests'), checked)
 }
 
