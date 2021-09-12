@@ -6,8 +6,13 @@ for (let i = 0; i < elements.length; i++) {
     elements[i].onclick = hasTooltipClick
 }
 
+window.onscroll = (e) => {
+    if (currentElement === null) return
+    setBinding()
+}
+
 function hasTooltipClick(e) {
-    let domRect = e.target.getBoundingClientRect()
+
     tooltip.textContent = e.target.getAttribute('title')
 
     if (tooltip.classList.contains('tooltip_active') && e.target === currentElement) {
@@ -18,9 +23,17 @@ function hasTooltipClick(e) {
         tooltip.classList.add('tooltip_active')
     }
 
-    let width = tooltip.getBoundingClientRect().width
+    currentElement = e.target
+    setBinding()
+    e.preventDefault();
+}
+
+function setBinding() {
+    let domRect = currentElement.getBoundingClientRect()
 
     let position = tooltip.dataset.position
+    let width = tooltip.getBoundingClientRect().width
+
     if (position === 'top' && domRect.top > 30) {
         tooltip.style.top = domRect.top - 30 + 'px';
         tooltip.style.left = domRect.left + 'px';
@@ -34,8 +47,4 @@ function hasTooltipClick(e) {
         tooltip.style.top = domRect.bottom + 5 + 'px';
         tooltip.style.left = domRect.left + 'px';
     }
-
-    currentElement = e.target
-
-    e.preventDefault();
 }
